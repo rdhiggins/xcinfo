@@ -35,26 +35,26 @@ extension Xcode: CustomStringConvertible, CustomDebugStringConvertible {
             components.append(number)
         }
         if case let .gmSeed(version) = version.release {
-            components.append("GM Seed \(version)")
+            components.append("GM_Seed_\(version)")
         } else if case let .beta(version) = version.release {
-            components.append("Beta \(version)")
+            components.append("Beta_\(version)")
         } else if case let .dp(version) = version.release {
-            components.append("DP \(version)")
+            components.append("DP_\(version)")
         } else if case let .rc(version) = version.release {
-            components.append("RC \(version)")
+            components.append("RC_\(version)")
         }
-        return components.joined(separator: " ")
+        return components.joined(separator: "_")
     }
 
-    var displayName: String { "\(displayVersion) (\(version.build ?? ""))" }
+    var displayName: String { "\(displayVersion)_(\(version.build ?? ""))" }
 
     var filename: String {
         let fileManager = FileManager.default
-        var filename = "Xcode \(displayVersion).app"
+        var filename = "Xcode_\(displayVersion).app"
         var counter = 1
         while fileManager.fileExists(atPath: "/Applications/\(filename)") {
             counter += 1
-            filename = "Xcode \(displayVersion) - \(counter).app"
+            filename = "Xcode_\(displayVersion)_\(counter).app"
         }
         return filename
     }
